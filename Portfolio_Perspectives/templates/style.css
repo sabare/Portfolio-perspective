@@ -1,0 +1,70 @@
+/* Styles for the title */
+.title {
+  text-align: center;
+  font-size: 36px;
+  margin-top: 50px;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+/* Styles for the forms */
+form {
+  max-width: 600px;
+  margin: 50px auto;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Styles for the legends */
+legend {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Styles for the labels */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Styles for the input fields */
+input[type="text"],
+textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* Styles for the submit button */
+.submit-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.submit-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Styles for the form IDs */
+  #form1 {
+    background-color: #f2f2f2;
+  }
+  
+  #form2 {
+    background-color: #d9d9d9;
+  }

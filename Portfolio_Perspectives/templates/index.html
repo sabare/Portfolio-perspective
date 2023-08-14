@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Flask App</title>
+    <script>
+      function addCompanyField() {
+        var numFields = document.getElementById("numFields").value;
+        var container = document.getElementById("companyFields");
+        while (container.hasChildNodes()) {
+          container.removeChild(container.lastChild);
+        }
+        for (var i = 1; i <= numFields; i++) {
+          var label = document.createElement("label");
+          label.htmlFor = "company" + i;
+          label.innerHTML = "Company " + i + ": ";
+          container.appendChild(label);
+          var input = document.createElement("input");
+          input.type = "text";
+          input.name = "company" + i;
+          input.id = "company" + i;
+          container.appendChild(input);
+          container.appendChild(document.createElement("br"));
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Enter Company Names</h1>
+    <form method="POST" action="/output">
+      <label for="numFields">Number of Companies:</label>
+      <input type="number" name="numFields" id="numFields" min="1" max="10" value="1"><br><br>
+      <div id="companyFields">
+        <label for="company1">Company 1:</label>
+        <input type="text" name="company1" id="company1"><br><br>
+      </div>
+      <input type="button" value="Add Company" onclick="addCompanyField()">
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
+

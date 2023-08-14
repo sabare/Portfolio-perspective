@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Portfolio Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+    .container {
+        width: 80%;
+        margin: auto;
+        margin-top: 50px;
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      
+      th {
+        background-color: #eee;
+      }
+      
+      td, th {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+      }
+      body {
+        background-color: #F1E5AC;
+      }
+    </style>
+      
+  </head>
+  <body>
+    <div class="container">
+      <h1>Company List and Suggested Investment</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Company Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for company, price in companies %}
+          <tr>
+            <td>{{ company }}</td>
+            <td>{{ price }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div>
+        <h2> *Negative (-ve) value indicates Short selling </h2>
+    </div>
+
+
+  </body>
+</html>
+

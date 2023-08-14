@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stock Analysis</title>
+    <link rel="stylesheet" href="templates\style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='static/css/bootstrap.min.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='static/js/bootstrap.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='static/js/bootstrap.min.js') }}"></script>
+    <style>
+      .title {
+        text-align: center;
+        font-size: 36px;
+        margin-top: 50px;
+        color: #008080; /* Teal color */
+        font-family: Arial, sans-serif;
+      }
+      h1{
+        text-align: center;
+        color : #ff7f50
+    
+      }
+    
+      /* Styles for the forms */
+      form {
+        max-width: 600px;
+        margin: 50px auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #f8f8f8; /* Light gray */
+      }
+      body {
+        background-color: #F1E5AC;
+      }
+    
+      /* Styles for the legends */
+      legend {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #008080; /* Teal color */
+      }
+    
+      /* Styles for the labels */
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+      }
+    
+      /* Styles for the input fields */
+      input[type="text"],
+      textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        background-color: #fff; /* White */
+        color: #333;
+      }
+    
+      /* Styles for the submit button */
+      .submit-button {
+        background-color: #008080; /* Teal color */
+        border: none;
+        color: #fff; /* White */
+        padding: 14px 28px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .submit-button:hover {
+        background-color: #006666; /* Darker teal color */
+      }
+    
+      /* Styles for the form IDs */
+      #form1 {
+        background-color: #f8f8f8; /* Light gray */
+        border: 1px solid #008080; /* Teal color */
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 5px;
+      }
+    
+      #form2 {
+        background-color: #f8f8f8; /* Light gray */
+        border: 1px solid #008080; /* Teal color */
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 5px;
+      }
+      select {
+        height: 100px;
+        width: 200px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 05px#ccc;
+        background-color: #fff; /* White */
+        color: #333;
+      }
+      .text-right {
+        float: right;
+        color: #333;
+      }
+      .form-legend{
+        text-align : center;
+        color: #ff7f50; /* Coral color */
+      }
+      #symbol{
+        height: 20px;
+        width: 200px;
+      }
+      .bubble-container {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      } 
+    </style>
+  </head>
+  <body>
+
+    <h1 class="title">Arcana Hackathon</h1>
+
+
+    <form method="POST" action="/output" id="form2">
+      <div class="form-group">
+        <h1>Portfolio Management</h1>
+        <label for="capt_amnt">Capital Amount:</label>
+        <input type="numbers" name="capt_amnt" id="capt_amnt" />
+      </div>
+      <div class="text-right">
+        <p>To select Multiple companies : Ctrl + click.</p>
+        <p>Press Submit button(or click enter) for evaluation </p>
+    </div>
+      <div class="form-group">
+        <h4>Select Companies</h4>
+        <form action="/output" method="POST">
+        <select name="company" multiple>
+          {% for company in companies_1 %}
+          <option value="{{ company }}">{{ company }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <br></br>
+      <div class="form-group">
+        <input type="submit" value="Submit" class="submit-button" />
+      </div>
+    </form>
+
+    <form method="POST" action="/output1" id="form1">
+      <div class="form-legend">
+        <h1>Stock chart analysis</h1>
+      </div>
+      <p>All values are required, if you don't want any specific indicator, please enter corresponding values as -1</p>
+      <div class="form-group">
+        <label for="symbol">Select a company:</label>
+        <select id="symbol" name="symbol">
+        {% for symbol in companies_1 %}
+        <option value="{{ symbol }}">{{ symbol }}</option>
+        {% endfor %}
+        </select> 
+      </div>
+      <br></br>
+      <div class="form-group">
+        <label for="sma-small">SMA_small:</label>
+        <input type="text" name="sma-small" id="sma-small" />
+      </div>
+      <div class="form-group">
+        <label for="sma-large">SMA_large:</label>
+        <input type="text" name="sma-large" id="sma-large" />
+      </div>
+      <div class="form-group">
+        <label for="bb-size">BB_size:</label>
+        <input type="text" name="bb-size" id="bb-size" />
+      </div>
+      <div class="form-group">
+        <label for="macd-small">MACD_small:</label>
+        <input type="text" name="macd-small" id="macd-small" />
+      </div>
+      <div class="form-group">
+        <label for="macd-large">MACD_large:</label>
+        <input type="text" name="macd-large" id="macd-large" />
+      </div>
+      <div class="form-group">
+        <label for="macd-signal">MACD_signal:</label>
+        <input type="text" name="macd-signal" id="macd-signal" />
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Submit" class="submit-button" />
+      </div>
+    </form>
+  </body>
+</html>
